@@ -7,13 +7,15 @@ DEPLOYMENTFOLDERS = folder_01
 QML_IMPORT_PATH =
 
 QMAKE_CXXFLAGS += -std=c++11
-DEFINES += _ELPP_ENABLE_ERRORS
+DEFINES += _ELPP_ENABLE_ERRORS ELPP_FEATURE_PERFORMANCE_TRACKING
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    ../../../easyloggingpp/src/easylogging++.cc
 
 HEADERS += \
-    ../../src/qmllogging.h
+    ../../src/qmllogging.h \
+    ../../../easyloggingpp/src/easylogging++.h
 
 android: {
     # ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

@@ -8,7 +8,7 @@ _INITIALIZE_QMLLOGGING
 int main(int argc, char *argv[])
 {
     QGuiApplication app(argc, argv);
-    _START_EASYLOGGINGPP(argc, argv);
+    START_EASYLOGGINGPP(argc, argv);
     
     
     QtQuick2ApplicationViewer viewer;

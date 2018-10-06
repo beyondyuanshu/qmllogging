@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 #include <QtCore/QObject>
 #include <QtCore/QHash>
-#define _ELPP_QT_LOGGING
+#define ELPP_QT_LOGGING
 #if !defined(_QMLLOGGING_AVOID_QDEBUG)
 #   include <QDebug>
 #   define _ELPP_INTERNAL_DEBUGGING_OUT_INFO qDebug()
@@ -32,11 +32,11 @@
 #   define _ELPP_INTERNAL_DEBUGGING_ENDL ""
 #   define _ELPP_INTERNAL_DEBUGGING_MSG(msg) QString::fromStdString(msg)
 #   define ELPP_CUSTOM_COUT qDebug()
-#   if defined(_ELPP_UNICODE)
+#   if defined(ELPP_UNICODE)
 #   define ELPP_CUSTOM_COUT_LINE(msg) QString::fromWCharArray(msg.c_str()).trimmed()
 #   else
 #   define ELPP_CUSTOM_COUT_LINE(msg) QString::fromStdString(msg).trimmed()
-#   endif  // defined(_ELPP_UNICODE)
+#   endif  // defined(ELPP_UNICODE)
 #endif  // !defined(_QMLLOGGING_AVOID_QDEBUG)
 
 // NOTE: Include easylogging++ according to your configurations
@@ -104,7 +104,7 @@ public:
             return;
         }
         m_timedBlocks.insert(blockName,
-                             QSharedPointer<Tracker>(new Tracker(blockName.toStdString(), _ELPP_MIN_UNIT, m_loggerId)));
+                             QSharedPointer<Tracker>(new Tracker(blockName.toStdString(), ELPP_MIN_UNIT, m_loggerId)));
     }
     void timeEnd(const HashMap::key_type &blockName)
     {
@@ -220,7 +220,7 @@ public:
     // Assertion functions
     Q_INVOKABLE inline void assert(bool condition, const QString &msg)
     {
-        if (_ELPP_DEBUG_LOG && !condition) {
+        if (ELPP_DEBUG_LOG && !condition) {
             CLOG(FATAL, m_loggerId.c_str()) << "Assertion failed: [" << msg << "] ";
         }
     }
@@ -232,7 +232,7 @@ public:
 #undef LogT
 #undef _INITIALIZE_QMLLOGGING
 #define _INITIALIZE_QMLLOGGING \
-    _INITIALIZE_EASYLOGGINGPP \
+    INITIALIZE_EASYLOGGINGPP \
     namespace el { \
         namespace qml { \
             QSharedPointer<QmlLogging> s_qmlLogging; \
